@@ -164,7 +164,7 @@ class TestMsgApplysettings:
         with pytest.raises(
             exceptions.TrezorFailure, match="Forbidden key path"
         ), client:
-            client.set_expected_responses([messages.Failure()])
+            client.set_expected_responses([messages.Failure])
             btc.get_address(client, "Bitcoin", BAD_ADDRESS)
 
         with client:
@@ -174,9 +174,7 @@ class TestMsgApplysettings:
             )
 
         with client:
-            client.set_expected_responses(
-                [messages.ButtonRequest(), messages.Address()]
-            )
+            client.set_expected_responses([messages.ButtonRequest, messages.Address])
             btc.get_address(client, "Bitcoin", BAD_ADDRESS)
 
         with client:
@@ -188,5 +186,5 @@ class TestMsgApplysettings:
         with pytest.raises(
             exceptions.TrezorFailure, match="Forbidden key path"
         ), client:
-            client.set_expected_responses([messages.Failure()])
+            client.set_expected_responses([messages.Failure])
             btc.get_address(client, "Bitcoin", BAD_ADDRESS)
